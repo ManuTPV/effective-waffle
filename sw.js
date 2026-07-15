@@ -1,19 +1,19 @@
-self.addEventListener('install', event => {
-    console.log('Service Worker installing...');
+self.addEventListener("install", event => {
+    console.log("Installing service worker");
     self.skipWaiting();
 });
 
-self.addEventListener('activate', event => {
-    console.log('Service Worker activating...');
+self.addEventListener("activate", event => {
+    console.log("Activating service worker");
 
     event.waitUntil(
         self.clients.claim()
     );
 });
 
-self.addEventListener('fetch', event => {
-    console.log('Intercepted:', event.request.url);
+self.addEventListener("fetch", event => {
+    console.log("Fetch:", event.request.url);
 
-    // Simply forward the request to the network
+    // Just let the browser perform the request normally.
     event.respondWith(fetch(event.request));
 });
