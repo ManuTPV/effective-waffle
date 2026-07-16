@@ -1,14 +1,81 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Service Worker Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CustomDashboard</title>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <h1>Service Worker - Effective Waffle v1</h1>
 
-    <p id="status">Not registered</p>
+    <header>
 
-    <script src="main.js"></script>
+        <div>
+            <h1 id="siteName">CustomDashboard</h1>
+            <p id="location"></p>
+        </div>
+
+        <div class="connection">
+            <span id="connectionIndicator"></span>
+            <span id="connectionText">Checking connection...</span>
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="dashboard">
+
+            <div class="slide-image">
+                <img
+                    id="slideImage"
+                    src=""
+                    alt=""
+                >
+            </div>
+
+            <div class="slide-content">
+
+                <p id="slideCounter"></p>
+
+                <h2 id="slideTitle"></h2>
+
+                <p id="slideDescription"></p>
+
+                <div class="status-box">
+                    <strong>Status</strong>
+                    <span id="statusMessage"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <button id="previousButton">
+            Previous
+        </button>
+
+        <button id="nextButton">
+            Next
+        </button>
+
+        <span id="lastUpdated"></span>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
 </body>
+
 </html>
