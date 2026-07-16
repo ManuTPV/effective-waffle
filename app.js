@@ -92,18 +92,27 @@ renderDashboard();
 
     }
 
-    catch (error) {
+catch (error) {
 
-        console.warn(
-            "Network request failed",
-            error
-        );
+    console.warn(
+        "Network request failed",
+        error
+    );
 
-        updateConnectionStatus(false);
 
-        await loadCachedDashboardData();
+    errorMessage.textContent =
+        "API request failed: "
+        + error.message;
 
-    }
+
+    updateConnectionStatus(
+        false
+    );
+
+
+    await loadCachedDashboardData();
+
+}
 
 }
 
