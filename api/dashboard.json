@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "updatedAt": "2026-07-16T12:00:00Z",
+
+    "site": {
+        "name": "Philips Professional TV Demo",
+        "location": "Meeting Room 1"
+    },
+
+    "status": {
+        "message": "All systems operational",
+        "level": "normal"
+    },
+
+    "slides": [
+        {
+            "id": 1,
+            "title": "Welcome",
+            "description": "Welcome to the CustomDashboard demonstration.",
+            "image": "images/image-1.svg",
+            "duration": 10000
+        },
+        {
+            "id": 2,
+            "title": "Today's Information",
+            "description": "This content is loaded dynamically from the API.",
+            "image": "images/image-2.svg",
+            "duration": 10000
+        },
+        {
+            "id": 3,
+            "title": "System Status",
+            "description": "The dashboard can continue working when the network is unavailable.",
+            "image": "images/image-3.svg",
+            "duration": 10000
+        }
+    ]
+}
