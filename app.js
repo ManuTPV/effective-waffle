@@ -79,14 +79,14 @@ async function loadDashboardData() {
 
         }
 
-        dashboardData =
-            await response.json();
+dashboardData =
+    await response.json();
 
-        console.log(
-            "Dashboard data loaded from network"
-        );
+cacheDashboardData(
+    dashboardData
+);
 
-        renderDashboard();
+renderDashboard();
 
         updateConnectionStatus(true);
 
