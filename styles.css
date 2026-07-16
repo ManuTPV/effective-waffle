@@ -8,11 +8,13 @@ body {
     min-height: 100%;
     font-family: Arial, sans-serif;
     background-color:rgba(255, 0, 0, 0.2);
-    color: white;
+    color: orange;
 }
 
 body {
+    margin: 0;
     min-height: 100vh;
+    
 }
 
 header {
