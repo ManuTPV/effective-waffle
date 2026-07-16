@@ -14,11 +14,11 @@ const APP_FILES = [
 
     "./api/dashboard.json",
 
-    "./images/image-1.svg",
+    "./images/screen-1.svg",
 
-    "./images/image-2.svg",
+    "./images/screen-2.svg",
 
-    "./images/image-3.svg"
+    "./images/screen-3.svg"
 
 ];
 
