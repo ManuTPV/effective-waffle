@@ -1,19 +1,228 @@
-self.addEventListener("install", event => {
-    console.log("Installing service worker");
-    self.skipWaiting();
-});
+const CACHE_NAME =
+    "custom-dashboard-v2";
 
-self.addEventListener("activate", event => {
-    console.log("Activating service worker");
 
-    event.waitUntil(
-        self.clients.claim()
+const APP_FILES = [
+
+    "./",
+
+    "./index.html",
+
+    "./styles.css",
+
+    "./app.js",
+
+    "./api/dashboard.json",
+
+    "./images/image-1.svg",
+
+    "./images/image-2.svg",
+
+    "./images/image-3.svg"
+
+];
+
+
+self.addEventListener(
+    "install",
+
+    event => {
+
+        event.waitUntil(
+
+            caches
+                .open(
+                    CACHE_NAME
+                )
+                .then(
+
+                    cache =>
+
+                        cache.addAll(
+                            APP_FILES
+                        )
+
+                )
+
+        );
+
+        self.skipWaiting();
+
+    }
+
+);
+
+
+self.addEventListener(
+
+    "activate",
+
+    event => {
+
+        event.waitUntil(
+
+            self.clients.claim()
+
+        );
+
+    }
+
+);
+
+
+self.addEventListener(
+
+    "fetch",
+
+    event => {
+
+        const request =
+            event.request;
+
+
+        const url =
+            new URL(
+                request.url
+            );
+
+
+        // API request
+
+        if (
+
+            url.pathname
+                .includes(
+                    "/api/"
+                )
+
+        ) {
+
+            event.respondWith(
+
+                networkFirst(
+                    request
+                )
+
+            );
+
+            return;
+
+        }
+
+
+        // Static application files
+
+        event.respondWith(
+
+            cacheFirst(
+                request
+            )
+
+        );
+
+    }
+
+);
+
+
+// Network first strategy
+
+async function networkFirst(
+    request
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                request
+            );
+
+
+        const cache =
+            await caches.open(
+                CACHE_NAME
+            );
+
+
+        cache.put(
+
+            request,
+
+            response.clone()
+
+        );
+
+
+        return response;
+
+    }
+
+    catch (error) {
+
+        const cachedResponse =
+            await caches.match(
+                request
+            );
+
+
+        if (cachedResponse) {
+
+            return cachedResponse;
+
+        }
+
+
+        return new Response(
+
+            JSON.stringify({
+
+                error:
+                    "Offline and no cached data available"
+
+            }),
+
+            {
+
+                status: 503,
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                }
+
+            }
+
+        );
+
+    }
+
+}
+
+
+// Cache first strategy
+
+async function cacheFirst(
+    request
+) {
+
+    const cachedResponse =
+        await caches.match(
+            request
+        );
+
+
+    if (cachedResponse) {
+
+        return cachedResponse;
+
+    }
+
+
+    return fetch(
+        request
     );
-});
 
-self.addEventListener("fetch", event => {
-    console.log("Fetch:", event.request.url);
-
-    // Just let the browser perform the request normally.
-    event.respondWith(fetch(event.request));
-});
+}
