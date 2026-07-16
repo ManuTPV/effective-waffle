@@ -287,6 +287,10 @@ function restartRotationTimer(
 
 
 // Keyboard / remote control navigation
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
 
 function setupNavigation() {
 
